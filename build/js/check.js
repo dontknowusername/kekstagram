@@ -5,7 +5,7 @@ var getMessage = function(a, b) {
 		square = 0;
 		
 	if (typeof a  == 'boolean') {
-    if (a == true) {
+    if (a) {
       return 'Переданное GIF-изображение анимировано и содержит ' + b + ' кадров';  
     } else {
       return 'Переданное GIF-изображение не анимировано'; 
