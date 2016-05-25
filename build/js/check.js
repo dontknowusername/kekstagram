@@ -4,10 +4,12 @@ var getMessage = function(a, b) {
 		sum = 0,
 		square = 0;
 		
-	if (typeof a  == 'boolean' && a == true) {
-   return 'Переданное GIF-изображение анимировано и содержит ' + b + ' кадров';  
-  } else if (typeof a  == 'boolean' && a == false) {
-   return 'Переданное GIF-изображение не анимировано'; 
+	if (typeof a  == 'boolean') {
+    if (a == true) {
+      return 'Переданное GIF-изображение анимировано и содержит ' + b + ' кадров';  
+    } else {
+      return 'Переданное GIF-изображение не анимировано'; 
+    }
   } else if (typeof a == 'number') { 
 		//а тут у меня не в желтой, а красной рамке - будто неправильно (но ошибок нет)
 		//в смысле хотя бы в консоле		
