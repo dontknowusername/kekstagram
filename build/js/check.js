@@ -1,9 +1,9 @@
 var getMessage = function(a, b) {
-  
+
   var i = 0,
     sum = 0,
     square = 0;
-    
+
   if (typeof a  == 'boolean') {
     if (a) {
       return 'Переданное GIF-изображение анимировано и содержит ' + b + ' кадров';  
