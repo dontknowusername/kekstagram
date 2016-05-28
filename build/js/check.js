@@ -31,3 +31,4 @@ var getMessage = function(a, b) {
     return 'Количество красных точек во всех строчках изображения: ' + sum;   
   }
 }
+go
