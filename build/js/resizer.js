@@ -142,10 +142,11 @@
       this._ctx.fill('evenodd');
       this._ctx.closePath();
       this._ctx.restore();
+      this._ctx.translate(this._container.width / 2, this._container.height / 2);
       this._ctx.fillStyle = '#fff';
-      this._ctx.font = '16px serif';
-      this._ctx.fillText(this._image.naturalWidth + ' x ' + this._image.naturalHeight, this._container.width / 2 - 30, 20);
-
+      this._ctx.font = '14px Arial';
+      this._ctx.textAlign = 'center';
+      this._ctx.fillText(this._image.naturalWidth + ' x ' + this._image.naturalHeight, 0, -this._resizeConstraint.side / 2 - 15);
     },
 
     /**
