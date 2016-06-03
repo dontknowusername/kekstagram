@@ -160,6 +160,52 @@
           resizeForm.classList.remove('invisible');
 
           hideMessage();
+
+          var resize = document.querySelector('#resize-fwd');
+          var leftVal = document.querySelector('#resize-x');
+          var topVal = document.querySelector('#resize-y');
+          var sideVal = document.querySelector('#resize-size');
+
+          sideVal.setAttribute('value', 1);
+          leftVal.setAttribute('value', 0);
+          topVal.setAttribute('value', 0);
+          sideVal.min = 1;
+          leftVal.min = 0;
+          topVal.min = 0;
+          sideVal.max = currentResizer._image.naturalWidth;
+
+          leftVal.oninput = function() {
+            sideVal.max = currentResizer._image.naturalWidth - leftVal.value;
+            var sumLeftSideVal = parseInt(leftVal.value, 10) + parseInt(sideVal.value, 10);
+            if (sumLeftSideVal > currentResizer._image.naturalWidth) {
+              resize.setAttribute('disabled', true);
+              resize.classList.add('disabled');
+            } else if (sumLeftSideVal <= currentResizer._image.naturalWidth){
+              resize.removeAttribute('disabled');
+              resize.classList.remove('disabled');
+            }
+          }
+
+          topVal.oninput = function() {
+            sideVal.max = currentResizer._image.naturalHeight - topVal.value;
+            var sumTopSideVal = parseInt(topVal.value, 10) + parseInt(sideVal.value, 10);
+            if (sumTopSideVal > currentResizer._image.naturalHeight) {
+              resize.setAttribute('disabled', true);
+              resize.classList.add('disabled');
+            } else if (sumTopSideVal <= currentResizer._image.naturalHeight){
+              resize.removeAttribute('disabled');
+              resize.classList.remove('disabled');
+            }
+          }
+
+          sideVal.oninput = function() {
+            if(sideVal.validity.rangeOverflow == true || sideVal.validity.rangeUnderflow == true) {
+              sideVal.setCustomValidity('сумма значений слева или сверху и стороны корявые');
+            } else {
+              sideVal.setCustomValidity('');
+            }
+          }
+
         };
 
         fileReader.readAsDataURL(element.files[0]);
