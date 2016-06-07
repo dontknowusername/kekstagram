@@ -166,13 +166,20 @@
           var topVal = document.querySelector('#resize-y');
           var sideVal = document.querySelector('#resize-size');
 
-          sideVal.setAttribute('value', 1);
           leftVal.setAttribute('value', 0);
           topVal.setAttribute('value', 0);
           sideVal.min = 1;
           leftVal.min = 0;
           topVal.min = 0;
-          sideVal.max = currentResizer._image.naturalWidth;
+          //sideVal.max = currentResizer._image.naturalWidth;
+
+          if (currentResizer._image.naturalWidth > currentResizer._image.naturalHeight) {
+            sideVal.setAttribute('value', currentResizer._image.naturalHeight);
+            sideVal.max = currentResizer._image.naturalHeight;
+          } else {
+            sideVal.setAttribute('value', currentResizer._image.naturalWidth);
+            sideVal.max = currentResizer._image.naturalWidth;
+          }
 
           leftVal.oninput = function() {
             sideVal.max = currentResizer._image.naturalWidth - leftVal.value;
@@ -180,7 +187,7 @@
             if (sumLeftSideVal > currentResizer._image.naturalWidth) {
               resize.setAttribute('disabled', true);
               resize.classList.add('disabled');
-            } else if (sumLeftSideVal <= currentResizer._image.naturalWidth){
+            } else if (sumLeftSideVal <= currentResizer._image.naturalWidth) {
               resize.removeAttribute('disabled');
               resize.classList.remove('disabled');
             }
@@ -192,7 +199,7 @@
             if (sumTopSideVal > currentResizer._image.naturalHeight) {
               resize.setAttribute('disabled', true);
               resize.classList.add('disabled');
-            } else if (sumTopSideVal <= currentResizer._image.naturalHeight){
+            } else if (sumTopSideVal <= currentResizer._image.naturalHeight) {
               resize.removeAttribute('disabled');
               resize.classList.remove('disabled');
             }
