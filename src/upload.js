@@ -171,7 +171,6 @@
           sideVal.min = 1;
           leftVal.min = 0;
           topVal.min = 0;
-          //sideVal.max = currentResizer._image.naturalWidth;
 
           if (currentResizer._image.naturalWidth > currentResizer._image.naturalHeight) {
             sideVal.setAttribute('value', currentResizer._image.naturalHeight);
@@ -206,7 +205,7 @@
           };
 
           sideVal.oninput = function() {
-            if(sideVal.validity.rangeOverflow === true || sideVal.validity.rangeUnderflow === true) {
+            if (sideVal.validity.rangeOverflow || sideVal.validity.rangeUnderflow) {
               sideVal.setCustomValidity('сумма значений слева или сверху и стороны корявые');
             } else {
               sideVal.setCustomValidity('');
