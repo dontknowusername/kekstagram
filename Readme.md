@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url] [![Dependency status][dependency-image]][dependency-url]
 
 * Студент: [Ренат Сафаралиев](https://up.htmlacademy.ru/javascript/5/user/212199).
-* Наставник: [Антон Лунёв](https://up.htmlacademy.ru/javascript/5/user/118520).
+* Наставник: [Александр Быков](https://up.htmlacademy.ru/javascript/5/user/7107).
 
 ---
 
