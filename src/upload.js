@@ -191,7 +191,7 @@
               resize.removeAttribute('disabled');
               resize.classList.remove('disabled');
             }
-          }
+          };
 
           topVal.oninput = function() {
             sideVal.max = currentResizer._image.naturalHeight - topVal.value;
@@ -203,15 +203,15 @@
               resize.removeAttribute('disabled');
               resize.classList.remove('disabled');
             }
-          }
+          };
 
           sideVal.oninput = function() {
-            if(sideVal.validity.rangeOverflow == true || sideVal.validity.rangeUnderflow == true) {
+            if(sideVal.validity.rangeOverflow === true || sideVal.validity.rangeUnderflow === true) {
               sideVal.setCustomValidity('сумма значений слева или сверху и стороны корявые');
             } else {
               sideVal.setCustomValidity('');
             }
-          }
+          };
 
         };
 
