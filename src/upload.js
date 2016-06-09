@@ -220,28 +220,31 @@ var browserCookies = require('browser-cookies');
 
           filter.onclick = function() {
             var dateNow = new Date();
-
+            var year = new Date(dateNow).getFullYear();
+            var birthDay = new Date(year + '-04-24');
             if (+dateNow <= +birthDay) {
-              var birthDay = new Date(dateNow.getFullYear() - 1 + '-04-24');
-            } else {
-              birthDay = new Date(dateNow.getFullYear() + '-04-24');
+              birthDay = new Date(year - 1 + '-04-24');
             }
+
             var timeExpires = +dateNow - (+birthDay);
             var dateToExpires = timeExpires + (+dateNow);
 
+            function setCookie(cookieName, cookieValue, cookieExpires) {
+              if (!cookieExpires) {
+                cookieExpires = new Date(dateToExpires);
+              }
+              browserCookies.set(cookieName, cookieValue, {expires: cookieExpires});
+            }
+
             if (filterChrome.checked) {
-              browserCookies.set('chrome', filterChrome.value, {
-                expires: new Date(dateToExpires)
-              });
-              browserCookies.set('sepia', '', {expires: +Date.now() - 1});
+              setCookie('chrome', filterChrome.value);
+              setCookie('sepia', '', 0);
             } else if (filterSepia.checked) {
-              browserCookies.set('sepia', filterSepia.value, {
-                expires: new Date(dateToExpires)
-              });
-              browserCookies.set('chrome', '', {expires: +Date.now() - 1});
+              setCookie('sepia', filterSepia.value);
+              setCookie('chrome', '', 0);
             } else {
-              browserCookies.set('chrome', '', {expires: +Date.now() - 1});
-              browserCookies.set('sepia', '', {expires: +Date.now() - 1});
+              setCookie('chrome', '', 0);
+              setCookie('sepia', '', 0);
             }
           };
 
