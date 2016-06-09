@@ -7,6 +7,8 @@
 
 'use strict';
 
+var browserCookies = require('browser-cookies');
+
 (function() {
   /** @enum {string} */
   var FileType = {
@@ -209,6 +211,49 @@
               sideVal.setCustomValidity('сумма значений слева или сверху и стороны корявые');
             } else {
               sideVal.setCustomValidity('');
+            }
+          };
+
+          var filterChrome = document.querySelector('#upload-filter-chrome');
+          var filterSepia = document.querySelector('#upload-filter-sepia');
+          var filter = document.querySelector('#filter-fwd');
+
+          filter.onclick = function() {
+            var dateNow = new Date();
+
+            if (+dateNow <= +birthDay) {
+              var birthDay = new Date(dateNow.getFullYear() - 1 + '-04-24');
+            } else {
+              birthDay = new Date(dateNow.getFullYear() + '-04-24');
+            }
+            var timeExpires = +dateNow - (+birthDay);
+            var dateToExpires = timeExpires + (+dateNow);
+
+            if (filterChrome.checked) {
+              browserCookies.set('chrome', filterChrome.value, {
+                expires: new Date(dateToExpires)
+              });
+              browserCookies.set('sepia', '', {expires: +Date.now() - 1});
+            } else if (filterSepia.checked) {
+              browserCookies.set('sepia', filterSepia.value, {
+                expires: new Date(dateToExpires)
+              });
+              browserCookies.set('chrome', '', {expires: +Date.now() - 1});
+            } else {
+              browserCookies.set('chrome', '', {expires: +Date.now() - 1});
+              browserCookies.set('sepia', '', {expires: +Date.now() - 1});
+            }
+          };
+
+          resize.onclick = function() {
+            var cookieChrome = browserCookies.get('chrome');
+            var cookieSepia = browserCookies.get('sepia');
+            if (cookieSepia === 'sepia') {
+              filterSepia.setAttribute('checked', 'checked');
+            } else if (cookieChrome === 'chrome') {
+              filterChrome.setAttribute('checked', 'checked');
+            } else {
+              console.log('кук нет, фильтер не назначен');
             }
           };
 
