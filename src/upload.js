@@ -7,6 +7,8 @@
 
 'use strict';
 
+var browserCookies = require('browser-cookies');
+
 (function() {
   /** @enum {string} */
   var FileType = {
@@ -132,6 +134,22 @@
     uploadMessage.classList.add('invisible');
   }
 
+  function setCookie(cookieName, cookieValue, cookieExpires) {
+    var dateNow = Date.now();
+    var year = new Date(dateNow).getFullYear();
+    var birthDay = new Date(year + '-04-24').getTime();
+    if (dateNow <= birthDay) {
+      birthDay = new Date(year - 1 + '-04-24').getTime();
+    }
+
+    var timeExpires = dateNow - birthDay;
+    var dateToExpires = timeExpires + dateNow;
+    if (!cookieExpires) {
+      cookieExpires = new Date(dateToExpires);
+    }
+    browserCookies.set(cookieName, cookieValue, {expires: cookieExpires});
+  }
+
   /**
    * Обработчик изменения изображения в форме загрузки. Если загруженный
    * файл является изображением, считывается исходник картинки, создается
@@ -209,6 +227,35 @@
               sideVal.setCustomValidity('сумма значений слева или сверху и стороны корявые');
             } else {
               sideVal.setCustomValidity('');
+            }
+          };
+
+          var filterChrome = document.querySelector('#upload-filter-chrome');
+          var filterSepia = document.querySelector('#upload-filter-sepia');
+          var filter = document.querySelector('#filter-fwd');
+
+          filter.onclick = function() {
+            if (filterChrome.checked) {
+              setCookie('chrome', filterChrome.value);
+              setCookie('sepia', '', 0);
+            } else if (filterSepia.checked) {
+              setCookie('sepia', filterSepia.value);
+              setCookie('chrome', '', 0);
+            } else {
+              setCookie('chrome', '', 0);
+              setCookie('sepia', '', 0);
+            }
+          };
+
+          resize.onclick = function() {
+            var cookieChrome = browserCookies.get('chrome');
+            var cookieSepia = browserCookies.get('sepia');
+            if (cookieSepia === 'sepia') {
+              filterSepia.setAttribute('checked', 'checked');
+            } else if (cookieChrome === 'chrome') {
+              filterChrome.setAttribute('checked', 'checked');
+            } else {
+              console.log('кук нет, фильтер не назначен');
             }
           };
 
