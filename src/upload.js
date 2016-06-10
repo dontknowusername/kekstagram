@@ -142,8 +142,8 @@ var browserCookies = require('browser-cookies');
       birthDay = new Date(year - 1 + '-04-24').getTime();
     }
 
-    var timeExpires = +dateNow - (+birthDay);
-    var dateToExpires = timeExpires + (+dateNow);
+    var timeExpires = dateNow - birthDay;
+    var dateToExpires = timeExpires + dateNow;
     if (!cookieExpires) {
       cookieExpires = new Date(dateToExpires);
     }
