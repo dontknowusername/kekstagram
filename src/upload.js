@@ -134,6 +134,22 @@ var browserCookies = require('browser-cookies');
     uploadMessage.classList.add('invisible');
   }
 
+  function setCookie(cookieName, cookieValue, cookieExpires) {
+    var dateNow = Date.now();
+    var year = new Date(dateNow).getFullYear();
+    var birthDay = new Date(year + '-04-24');
+    if (+dateNow <= +birthDay) {
+      birthDay = new Date(year - 1 + '-04-24');
+    }
+
+    var timeExpires = +dateNow - (+birthDay);
+    var dateToExpires = timeExpires + (+dateNow);
+    if (!cookieExpires) {
+      cookieExpires = new Date(dateToExpires);
+    }
+    browserCookies.set(cookieName, cookieValue, {expires: cookieExpires});
+  }
+
   /**
    * Обработчик изменения изображения в форме загрузки. Если загруженный
    * файл является изображением, считывается исходник картинки, создается
@@ -219,23 +235,6 @@ var browserCookies = require('browser-cookies');
           var filter = document.querySelector('#filter-fwd');
 
           filter.onclick = function() {
-            var dateNow = new Date();
-            var year = new Date(dateNow).getFullYear();
-            var birthDay = new Date(year + '-04-24');
-            if (+dateNow <= +birthDay) {
-              birthDay = new Date(year - 1 + '-04-24');
-            }
-
-            var timeExpires = +dateNow - (+birthDay);
-            var dateToExpires = timeExpires + (+dateNow);
-
-            function setCookie(cookieName, cookieValue, cookieExpires) {
-              if (!cookieExpires) {
-                cookieExpires = new Date(dateToExpires);
-              }
-              browserCookies.set(cookieName, cookieValue, {expires: cookieExpires});
-            }
-
             if (filterChrome.checked) {
               setCookie('chrome', filterChrome.value);
               setCookie('sepia', '', 0);
