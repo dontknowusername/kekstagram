@@ -137,9 +137,9 @@ var browserCookies = require('browser-cookies');
   function setCookie(cookieName, cookieValue, cookieExpires) {
     var dateNow = Date.now();
     var year = new Date(dateNow).getFullYear();
-    var birthDay = new Date(year + '-04-24');
-    if (+dateNow <= +birthDay) {
-      birthDay = new Date(year - 1 + '-04-24');
+    var birthDay = new Date(year + '-04-24').getTime();
+    if (dateNow <= birthDay) {
+      birthDay = new Date(year - 1 + '-04-24').getTime();
     }
 
     var timeExpires = +dateNow - (+birthDay);
