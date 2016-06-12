@@ -21,10 +21,10 @@ var getPictureElement = function(data, container) {
     imgElem.src = image.src;
     imgElem.width = 182;
     imgElem.height = 182;
-  }
+  };
   image.onerror = function() {
     element.classList.add('picture-load-failure');
-  }
+  };
   image.src = data.url;
 
   element.querySelector('.picture-comments').textContent = data.comments;
