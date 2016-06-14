@@ -1,4 +1,5 @@
 'use strict';
+var IMAGE_SIZE = 182;
 var formFilters = document.querySelector('.filters');
 formFilters.classList.add('hidden');
 
@@ -11,7 +12,6 @@ if ('content' in templateElement) {
 } else {
   pictureClone = templateElement.querySelector('.picture');
 }
-
 var getPictureElement = function(data, container) {
   var element = pictureClone.cloneNode(true);
 
@@ -19,8 +19,8 @@ var getPictureElement = function(data, container) {
   var imgElem = element.querySelector('img');
   image.onload = function() {
     imgElem.src = image.src;
-    imgElem.width = 182;
-    imgElem.height = 182;
+    imgElem.width = IMAGE_SIZE;
+    imgElem.height = IMAGE_SIZE;
   };
   image.onerror = function() {
     element.classList.add('picture-load-failure');
