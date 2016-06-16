@@ -3,6 +3,8 @@ var IMAGE_SIZE = 182;
 var formFilters = document.querySelector('.filters');
 formFilters.classList.add('hidden');
 
+
+
 var picturesContainer = document.querySelector('.pictures');
 var templateElement = document.querySelector('template');
 var pictureClone;
@@ -12,6 +14,24 @@ if ('content' in templateElement) {
 } else {
   pictureClone = templateElement.querySelector('.picture');
 }
+
+var jsonpQuery = function(url, callback) {
+  var tagScript = document.createElement('script');
+  tagScript.src = url;
+  document.body.appendChild(tagScript);
+
+  tagScript.onload = function() {
+    callback();
+  };
+};
+
+window.__picturesLoadCallback = function() {
+  var pictures = arguments[0] || [];
+  pictures.forEach(function(picture) {
+    getPictureElement(picture, picturesContainer);
+  });
+};
+
 var getPictureElement = function(data, container) {
   var element = pictureClone.cloneNode(true);
 
@@ -34,8 +54,6 @@ var getPictureElement = function(data, container) {
   return element;
 };
 
-window.pictures.forEach(function(picture) {
-  getPictureElement(picture, picturesContainer);
-});
+jsonpQuery('//up.htmlacademy.ru/assets/js_intensive/jsonp/pictures.js', window.__picturesLoadCallback);
 
 formFilters.classList.remove('hidden');
