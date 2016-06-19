@@ -80,10 +80,10 @@ labels.forEach(function(label) {
   label.appendChild(index);
 });
 
-var renderPictures = function(pictures) {
+var renderPictures = function(picturesa) {
   picturesContainer.innerHTML = '';
 
-  pictures.forEach(function(picture) {
+  picturesa.forEach(function(picture) {
     getPictureElement(picture, picturesContainer);
   });
 };
