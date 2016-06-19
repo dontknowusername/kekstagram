@@ -17,6 +17,9 @@
 
   <input type="radio" id="filter-discussed" class="filters-radio" name="filter" value="discussed">
   <label for="filter-discussed" class="filters-item">Обсуждаемые</label>
+
+  <input type="radio" id="filter-test" class="filters-radio" name="filter" value="test">
+  <label for="filter-test" class="filters-item">Тест</label>
 </form>
 
 <div class="upload">
@@ -87,14 +90,12 @@
     </span>
   </a>
 </template>
-<script>
-  var pictures = [];
 
-  var __picturesLoadCallback = function(data) {
-    pictures = data;
-  };
-</script>
-<script src="//up.htmlacademy.ru/assets/js_intensive/jsonp/pictures.js"></script>
+<template id="error-template">
+  <span class="error-text">
+    Печаль беда картинок нет
+  </span>
+</template>
 <script src="js/main.js"></script>
 </body>
 </html>
