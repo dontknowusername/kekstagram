@@ -90,7 +90,7 @@ var renderPictures = function(pictures) {
 
 var getFilteredPictures = function(pictures, filter) {
   var picturesToFilter = pictures.slice(0);
-  
+
   var errorTemplate = function() {
     var upload = document.querySelector('.upload');
     var uploadError = upload.querySelectorAll('.error-text');
@@ -127,7 +127,7 @@ var getFilteredPictures = function(pictures, filter) {
       break;
 
     case Filter.TEST:
-      picturesToFilter = picturesToFilter.filter(function(a, b) {
+      picturesToFilter = picturesToFilter.filter(function(a) {
         return a.likes > 24000;
       });
       break;
