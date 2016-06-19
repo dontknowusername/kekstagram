@@ -89,7 +89,7 @@ var renderPictures = function(pictures) {
 };
 
 var getFilteredPictures = function(loadFilterPic, filter) {
-  var loadFilterPic = pictures.slice(0);
+  var picturesToFilter = loadFilterPic.slice(0);
 
   var errorTemplate = function() {
     var upload = document.querySelector('.upload');
@@ -97,7 +97,7 @@ var getFilteredPictures = function(loadFilterPic, filter) {
     if (uploadError[0]) {
       upload.removeChild(uploadError[0]);
     }
-    if (loadFilterPic.length === 0) {
+    if (picturesToFilter.length === 0) {
       var templateError = document.querySelector('#error-template');
       var templateErrorContent = 'content' in templateError ? templateError.content : templateError;
       var errorElement = templateErrorContent.querySelector('.error-text').cloneNode(true);
@@ -110,30 +110,30 @@ var getFilteredPictures = function(loadFilterPic, filter) {
       break;
 
     case Filter.NEW:
-      loadFilterPic = loadFilterPic.filter(function(a) {
+      picturesToFilter = picturesToFilter.filter(function(a) {
         var lastFourDays = 4 * 24 * 60 * 60 * 1000;
         var dateImg = new Date(a.date);
         return dateImg >= (Date.now() - lastFourDays) && dateImg < Date.now();
       });
-      loadFilterPic = loadFilterPic.sort(function(a, b) {
+      picturesToFilter = picturesToFilter.sort(function(a, b) {
         return (new Date(b.date) - new Date(a.date));
       });
       break;
 
     case Filter.DISCUSS:
-      loadFilterPic = loadFilterPic.sort(function(a, b) {
+      picturesToFilter = picturesToFilter.sort(function(a, b) {
         return b.comments - a.comments;
       });
       break;
 
     case Filter.TEST:
-      loadFilterPic = loadFilterPic.filter(function(a) {
+      picturesToFilter = picturesToFilter.filter(function(a) {
         return a.likes > 24000;
       });
       break;
   }
   errorTemplate();
-  return loadFilterPic;
+  return picturesToFilter;
 };
 
 var setFilterEnabled = function(filter) {
