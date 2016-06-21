@@ -1,8 +1,9 @@
 'use strict';
 var IMAGE_SIZE = 182;
+var PICTURES_LOAD_URL = '//o0.github.io/assets/json/pictures.json';
+
 var formFilters = document.querySelector('.filters');
 formFilters.classList.add('hidden');
-
 var picturesContainer = document.querySelector('.pictures');
 var templateElement = document.querySelector('template');
 var pictureClone;
@@ -13,12 +14,10 @@ var Filter = {
   'DISCUSS': 'filter-discussed',
   'TEST': 'filter-test'
 };
-
+var DEFAULT_FILTER = Filter.ALL;
 var pictures = [];
 
-var DEFAULT_FILTER = Filter.ALL;
 
-var PICTURES_LOAD_URL = '//o0.github.io/assets/json/pictures.json';
 if ('content' in templateElement) {
   pictureClone = templateElement.content.querySelector('.picture');
 } else {
@@ -35,9 +34,9 @@ var getPictures = function(callback) {
   };
 
   xhr.onreadystatechange = function(evt) {
-    if(xhr.readyState === 3) {
+    if(xhr.readyState === xhr.LOADING) {
       picturesContainer.classList.remove('pictures-loading');
-    } else if (xhr.readyState === 4) {
+    } else if (xhr.readyState === xhr.DONE) {
       var loadedData = JSON.parse(evt.target.response);
       callback(loadedData);
     }
@@ -48,7 +47,6 @@ var getPictures = function(callback) {
 
   xhr.open('GET', PICTURES_LOAD_URL);
   xhr.send();
-  //console.log(xhr.readyState);
 };
 
 var getPictureElement = function(data, container) {
@@ -74,11 +72,11 @@ var getPictureElement = function(data, container) {
 };
 
 var labels = document.querySelectorAll('.filters-item');
-
 labels.forEach(function(label) {
   var index = document.createElement('sup');
   label.appendChild(index);
 });
+
 
 var renderPictures = function(picturesa) {
   picturesContainer.innerHTML = '';
