@@ -30,7 +30,7 @@ if ('content' in templateElement) {
 }
 
 
-var getPictureElement = function(data, container) {
+var getPictureElement = function(data) {
   var element = pictureClone.cloneNode(true);
 
   var image = new Image();
@@ -58,7 +58,7 @@ var getPictureElement = function(data, container) {
   element.querySelector('.picture-comments').textContent = data.comments;
   element.querySelector('.picture-likes').textContent = data.likes;
 
-  container.appendChild(element);
+  picturesContainer.appendChild(element);
   return element;
 };
 
@@ -78,7 +78,7 @@ var renderPictures = function(picturesa, page, replace) {
   var to = from + PAGE_SIZE;
 
   picturesa.slice(from, to).forEach(function(picture) {
-    getPictureElement(picture, picturesContainer);
+    getPictureElement(picture);
   });
 };
 
