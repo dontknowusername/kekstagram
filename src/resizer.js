@@ -141,7 +141,6 @@
       this._ctx.fill('evenodd');
 
       this._ctx.closePath();
-      this._ctx.translate(this._container.width / 2, this._container.height / 2);
       this._ctx.fillStyle = '#fff';
       this._ctx.font = '14px Arial';
       this._ctx.textAlign = 'center';
