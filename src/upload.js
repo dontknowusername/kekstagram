@@ -374,7 +374,6 @@ var browserCookies = require('browser-cookies');
     leftVal.value = resizer.x;
     topVal.value = resizer.y;
     sideVal.value = resizer.side;
-    //console.log(resizer.x);
   });
 
 
