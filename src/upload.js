@@ -1,5 +1,3 @@
-/* global Resizer: true */
-
 /**
  * @fileoverview
  * @author Igor Alexeenko (o0)
@@ -10,6 +8,8 @@
 var browserCookies = require('browser-cookies');
 
 (function() {
+
+  var Resizer = require('./resizer');
   /** @enum {string} */
   var FileType = {
     'GIF': '',
