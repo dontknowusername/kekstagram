@@ -45,11 +45,4 @@ module.exports = {
     picturesContainer.appendChild(element);
     return element;
   }
-
-  // var labels = document.querySelectorAll('.filters-item');
-  // labels.forEach(function(label) {
-  //   var index = document.createElement('sup');
-  //   label.appendChild(index);
-  // });
-
 };
