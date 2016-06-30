@@ -335,4 +335,5 @@
   };
 
   window.Resizer = Resizer;
+  module.exports = Resizer;
 })();
